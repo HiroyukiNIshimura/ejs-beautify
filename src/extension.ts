@@ -39,7 +39,9 @@ function disposeHandlers() {
 const selectors = [
     'ejs', //EJS (Embedded JavaScript) Templates
     'erb', //ERB (Embedded Ruby)
-    'html', //HTML
+    //'js', //JavaScript
+    //'javascript', //JavaScript
+    //'typescript', //Typescript
     'tpl', //Underscore Templates (TPL)
     'xml', //XML
     'xslt', //XSLT
