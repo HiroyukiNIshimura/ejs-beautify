@@ -2,7 +2,7 @@
   "name": "ejs-beautify",
   "displayName": "EJS Beautify",
   "publisher": "j69",
-  "description": "",
+  "description": "A formatter extension for EJS files for VS Code. 'js-beautify' is used as the format engine.",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.59.0"
@@ -14,7 +14,293 @@
     "*"
   ],
   "main": "./out/extension.js",
-  "contributes": {},
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "EJS Beautify",
+      "properties": {
+        "js-beautify.formatting": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to enable formatting."
+        },
+        "js-beautify.indent_size": {
+          "type": "integer",
+          "default": 4,
+          "description": "Indentation size."
+        },
+        "js-beautify.indent_char": {
+          "type": "string",
+          "default": " ",
+          "description": "Indentation char."
+        },
+        "js-beautify.indent_with_tabs": {
+          "type": "boolean",
+          "default": false,
+          "description": "Indent with tabs.(Override indent_size and indent_size)"
+        },
+        "js-beautify.editorconfig": {
+          "type": "boolean",
+          "default": false,
+          "description": "Use EditorConfig to set up the options."
+        },
+        "js-beautify.eol": {
+          "type": "string",
+          "default": "\n",
+          "description": "Character(s) to use as line terminators. (default newline - '\n')"
+        },
+        "js-beautify.end_with_newline": {
+          "type": "boolean",
+          "default": false,
+          "description": "End output with newline."
+        },
+        "js-beautify.indent_level": {
+          "type": "integer",
+          "default": 0,
+          "description": "Initial indentation level."
+        },
+        "js-beautify.preserve_newlines": {
+          "type": "boolean",
+          "default": true,
+          "description": "Preserve existing line-breaks."
+        },
+        "js-beautify.max_preserve_newlines": {
+          "type": "integer",
+          "default": 10,
+          "description": "Maximum number of line-breaks to be preserved in one chunk."
+        },
+        "js-beautify.space_in_paren": {
+          "type": "boolean",
+          "default": false,
+          "description": "Add padding spaces within paren, ie. f( a, b )."
+        },
+        "js-beautify.space_in_empty_paren": {
+          "type": "boolean",
+          "default": false,
+          "description": "Add a single space inside empty paren, ie. f( )."
+        },
+        "js-beautify.jslint_happy": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable jslint-stricter mode."
+        },
+        "js-beautify.space_after_anon_function": {
+          "type": "boolean",
+          "default": false,
+          "description": "Add a space before an anonymous function's parens, ie. function ()."
+        },
+        "js-beautify.space_after_named_function": {
+          "type": "boolean",
+          "default": false,
+          "description": "Add a space before a named function's parens, i.e. function example ()."
+        },
+        "js-beautify.brace_style": {
+          "type": "string",
+          "default": "collapse",
+          "description": "[collapse-preserve-inline|collapse|expand|end-expand|none]."
+        },
+        "js-beautify.unindent_chained_methods": {
+          "type": "boolean",
+          "default": false,
+          "description": "Don't indent chained method calls."
+        },
+        "js-beautify.break_chained_methods": {
+          "type": "boolean",
+          "default": false,
+          "description": "Break chained method calls across subsequent lines."
+        },
+        "js-beautify.keep_array_indentation": {
+          "type": "boolean",
+          "default": false,
+          "description": "Preserve array indentation."
+        },
+        "js-beautify.unescape_strings": {
+          "type": "boolean",
+          "default": false,
+          "description": "Decode printable characters encoded in xNN notation."
+        },
+        "js-beautify.wrap_line_length": {
+          "type": "integer",
+          "default": 0,
+          "description": "Wrap lines that exceed N characters."
+        },
+        "js-beautify.e4x": {
+          "type": "boolean",
+          "default": false,
+          "description": "Pass E4X xml literals through untouched."
+        },
+        "js-beautify.comma_first": {
+          "type": "boolean",
+          "default": false,
+          "description": "Put commas at the beginning of new line instead of end."
+        },
+        "js-beautify.operator_position": {
+          "type": "string",
+          "default": "before-newline",
+          "description": "Set operator position (before-newline|after-newline|preserve-newline) [before-newline]."
+        },
+        "js-beautify.indent_empty_lines": {
+          "type": "boolean",
+          "default": false,
+          "description": "Keep indentation on empty lines."
+        },
+        "js-beautify.templating": {
+          "type": "array",
+          "default": [
+            "erb"
+          ],
+          "description": "List of templating languages (auto,none,django,erb,handlebars,php,smarty) ['auto'] auto = none in JavaScript, all in html."
+        },
+        "js-beautify.indent_inner_html": {
+          "type": "boolean",
+          "default": false,
+          "description": "Indent <head> and <body> sections. Default is false."
+        },
+        "js-beautify.indent_body_inner_html": {
+          "type": "boolean",
+          "default": true,
+          "description": "Indent <body> sections."
+        },
+        "js-beautify.indent_head_inner_html": {
+          "type": "boolean",
+          "default": true,
+          "description": "Indent <head> sections."
+        },
+        "js-beautify.indent_handlebars": {
+          "type": "boolean",
+          "default": true,
+          "description": "Indentation char."
+        },
+        "js-beautify.wrap_attributes": {
+          "type": "string",
+          "default": "auto",
+          "description": "['auto', 'force', 'force-aligned', 'force-expand-multiline', 'aligned-multiple', 'preserve', 'preserve-aligned']"
+        },
+        "js-beautify.wrap_attributes_indent_size": {
+          "type": "integer",
+          "default": 4,
+          "description": "Wrap attributes indent size."
+        },
+        "js-beautify.extra_liners": {
+          "type": "array",
+          "default": "['head', 'body', '/html']",
+          "description": "List of tags (defaults to [head,body,/html] that should have an extra newline before them."
+        },
+        "js-beautify.inline": {
+          "type": "array",
+          "default": [
+            "a",
+            "abbr",
+            "area",
+            "audio",
+            "b",
+            "bdi",
+            "bdo",
+            "br",
+            "button",
+            "canvas",
+            "cite",
+            "code",
+            "data",
+            "datalist",
+            "del",
+            "dfn",
+            "em",
+            "embed",
+            "i",
+            "iframe",
+            "img",
+            "input",
+            "ins",
+            "kbd",
+            "keygen",
+            "label",
+            "map",
+            "mark",
+            "math",
+            "meter",
+            "noscript",
+            "object",
+            "output",
+            "progress",
+            "q",
+            "ruby",
+            "s",
+            "samp",
+            "select",
+            "small",
+            "span",
+            "strong",
+            "sub",
+            "sup",
+            "svg",
+            "template",
+            "textarea",
+            "time",
+            "u",
+            "var",
+            "video",
+            "wbr",
+            "text",
+            "acronym",
+            "big",
+            "strike",
+            "tt"
+          ],
+          "description": "List of tags to be considered inline tags."
+        },
+        "js-beautify.void_elements": {
+          "type": "array",
+          "default": [
+            "area",
+            "base",
+            "br",
+            "col",
+            "embed",
+            "hr",
+            "img",
+            "input",
+            "keygen",
+            "link",
+            "menuitem",
+            "meta",
+            "param",
+            "source",
+            "track",
+            "wbr",
+            "!doctype",
+            "?xml",
+            "basefont",
+            "isindex"
+          ],
+          "description": "Indentation char."
+        },
+        "js-beautify.unformatted": {
+          "type": "array",
+          "default": [],
+          "description": "List of tags (defaults to inline) that should not be reformatted."
+        },
+        "js-beautify.content_unformatted": {
+          "type": "array",
+          "default": [
+            "pre",
+            "textarea"
+          ],
+          "description": "List of tags (defaults to pre) whose content should not be reformatted."
+        },
+        "js-beautify.unformatted_content_delimiter": {
+          "type": "string",
+          "default": "",
+          "description": "Keep text content together between this string"
+        },
+        "js-beautify.indent_scripts": {
+          "type": "string",
+          "default": "normal",
+          "description": "Sets indent level inside script tags ['normal', 'keep', 'separate']"
+        }
+      }
+    }
+  },
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
