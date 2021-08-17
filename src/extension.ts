@@ -12,6 +12,7 @@ import {
     TextEdit
 } from 'vscode';
 
+//https://github.com/beautify-web/js-beautify
 const jsbeautify = require('js-beautify');
 const config = workspace.getConfiguration('js-beautify');
 

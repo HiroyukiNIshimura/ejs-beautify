@@ -3,12 +3,33 @@
   "displayName": "EJS Beautify",
   "publisher": "j69",
   "description": "A formatter extension for EJS files for VS Code. 'js-beautify' is used as the format engine.",
-  "version": "0.0.1",
+  "version": "0.9.9",
   "engines": {
     "vscode": "^1.59.0"
   },
+  "homepage": "https://github.com/HiroyukiNIshimura/ejs-beautify",
+  "bugs": {
+    "url": "https://github.com/HiroyukiNIshimura/ejs-beautify/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HiroyukiNIshimura/ejs-beautify.git"
+  },
+  "icon": "file_type_ejs_icon.png",
+  "galleryBanner": {
+    "color": "#4c566a",
+    "theme": "dark"
+  },
   "categories": [
+    "Formatters",
+    "Programming Languages",
     "Other"
+  ],
+  "keywords": [
+    "ejs",
+    "nodejs",
+    "format",
+    "beautify"
   ],
   "activationEvents": [
     "*"
@@ -47,7 +68,7 @@
         "js-beautify.eol": {
           "type": "string",
           "default": "\n",
-          "description": "Character(s) to use as line terminators. (default newline - '\n')"
+          "description": "Character(s) to use as line terminators. (default newline - '\\n')"
         },
         "js-beautify.end_with_newline": {
           "type": "boolean",
