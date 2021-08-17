@@ -166,11 +166,6 @@
           "default": true,
           "description": "Indent <head> sections."
         },
-        "js-beautify.indent_handlebars": {
-          "type": "boolean",
-          "default": true,
-          "description": "Indentation char."
-        },
         "js-beautify.wrap_attributes": {
           "type": "string",
           "default": "auto",
@@ -273,7 +268,7 @@
             "basefont",
             "isindex"
           ],
-          "description": "Indentation char."
+          "description": "Self closing tags."
         },
         "js-beautify.unformatted": {
           "type": "array",

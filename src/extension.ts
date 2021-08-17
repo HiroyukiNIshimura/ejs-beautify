@@ -13,6 +13,7 @@ import {
 } from 'vscode';
 
 const jsbeautify = require('js-beautify');
+const config = workspace.getConfiguration('js-beautify');
 
 let formatterHandler: undefined | Disposable;
 let rangeFormatterHandler: undefined | Disposable;
@@ -45,57 +46,8 @@ const selectors = [
 
 const prettyDiff = (document: TextDocument, range: Range) => {
     const result = [];
-    let output = "";
-    const beautifyOptions = {
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        indent_size: 4,
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        indent_char: " ",
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        indent_with_tabs: false,
-        editorconfig: false,
-        eol: "\n",
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        end_with_newline: false,
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        indent_level: 0,
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        preserve_newlines: true,
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        max_preserve_newlines: 10,
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        space_in_paren: false,
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        space_in_empty_paren: false,
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        jslint_happy: false,
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        space_after_anon_function: false,
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        space_after_named_function: false,
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        brace_style: "collapse",
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        unindent_chained_methods: false,
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        break_chained_methods: false,
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        keep_array_indentation: false,
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        unescape_strings: false,
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        wrap_line_length: 0,
-        e4x: false,
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        comma_first: false,
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        operator_position: "before-newline",
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        indent_empty_lines: false,
-        templating: ["auto"]
-    };
 
-    output = jsbeautify.html(document.getText(range), beautifyOptions);
+    let output = jsbeautify.html(document.getText(range), config);
     result.push(TextEdit.replace(range, output));
     return result;
 };
@@ -147,7 +99,9 @@ export function activate(context: ExtensionContext) {
         }
     }
 
-    registerFormatter();
+    if (config.formatting) {
+        registerFormatter();
+    }
 }
 
 // this method is called when your extension is deactivated
