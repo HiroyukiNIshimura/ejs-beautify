@@ -6,4 +6,17 @@ A formatter extension for EJS files for VS Code. 'js-beautify' is used as the fo
 
 ### 1.0.0
 
-New release.
+Current release.
+
+## settings
+
+Please add the following to 'settings.json'.
+
+```
+ "emmet.includeLanguages": {
+    "ejs": "html",
+  },
+ "[html]": {
+    "editor.defaultFormatter": "j69.ejs-beautify"
+  },
+```
