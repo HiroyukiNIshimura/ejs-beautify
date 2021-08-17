@@ -1,2 +1,9 @@
-# ejs-beautify
-EJS file dedicated formatter extension for VS Code
+# ejs-beautify README
+
+## Features
+
+You can format the EJS file.
+
+### 1.0.0
+
+Initial release.
