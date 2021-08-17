@@ -10,4 +10,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## 1.0.0
 
-- Fixed a bug that deleted html from the target
+- Fixed a bug that deleted html from the target.
+
+## 1.0.1
+
+- Edited Readme.
