@@ -45,12 +45,13 @@ const selectors = [
     'xslt', //XSLT
 ];
 
-const prettyDiff = (document: TextDocument, range: Range) => {
+const beautify = (document: TextDocument, range: Range) => {
     const result = [];
+    let opts = JSON.parse(JSON.stringify(config));
 
-    let output = jsbeautify.html(document.getText(range), config);
+    let output = jsbeautify.html(document.getText(range), opts);
     if (output) {
-        output = output.replace(/\n\n/g, '\n')
+        output = output.replace(/\n\n(\s+{{)/g, '\n$1')
     }
     result.push(TextEdit.replace(range, output));
     return result;
@@ -84,7 +85,7 @@ export function activate(context: ExtensionContext) {
                     }
 
                     const rng = new Range(new Position(range.start.line, 0), end);
-                    return prettyDiff(document, rng);
+                    return beautify(document, rng);
                 }
             });
 
@@ -97,7 +98,7 @@ export function activate(context: ExtensionContext) {
 
                     const end = new Position(document.lineCount - 1, document.lineAt(document.lineCount - 1).text.length);
                     const rng = new Range(start, end);
-                    return prettyDiff(document, rng);
+                    return beautify(document, rng);
                 }
             });
         }

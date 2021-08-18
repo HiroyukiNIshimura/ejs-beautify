@@ -47,7 +47,7 @@
         },
         "js-beautify.indent_size": {
           "type": "integer",
-          "default": 4,
+          "default": 2,
           "description": "Indentation size."
         },
         "js-beautify.indent_char": {
@@ -82,12 +82,12 @@
         },
         "js-beautify.preserve_newlines": {
           "type": "boolean",
-          "default": false,
+          "default": true,
           "description": "Preserve existing line-breaks."
         },
         "js-beautify.max_preserve_newlines": {
           "type": "integer",
-          "default": 10,
+          "default": 5,
           "description": "Maximum number of line-breaks to be preserved in one chunk."
         },
         "js-beautify.space_in_paren": {
