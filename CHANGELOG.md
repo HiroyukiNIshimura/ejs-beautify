@@ -15,3 +15,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## 1.0.1
 
 - Edited Readme.
+
+## 1.0.2
+
+- If there is Vue "{{", js-beautify formatting will insert a line break, so it corresponds to that behavior.

@@ -3,7 +3,7 @@
   "displayName": "EJS Beautify",
   "publisher": "j69",
   "description": "A formatter extension for EJS files for VS Code. 'js-beautify' is used as the format engine.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "engines": {
     "vscode": "^1.59.0"
   },
@@ -82,7 +82,7 @@
         },
         "js-beautify.preserve_newlines": {
           "type": "boolean",
-          "default": true,
+          "default": false,
           "description": "Preserve existing line-breaks."
         },
         "js-beautify.max_preserve_newlines": {
@@ -173,7 +173,10 @@
         "js-beautify.templating": {
           "type": "array",
           "default": [
-            "erb"
+            "erb",
+            "django",
+            "handlebars",
+            "php"
           ],
           "description": "List of templating languages (auto,none,django,erb,handlebars,php,smarty) ['auto'] auto = none in JavaScript, all in html."
         },
@@ -188,6 +191,11 @@
           "description": "Indent <body> sections."
         },
         "js-beautify.indent_head_inner_html": {
+          "type": "boolean",
+          "default": true,
+          "description": "Indent <head> sections."
+        },
+        "js-beautify.indent_handlebars ": {
           "type": "boolean",
           "default": true,
           "description": "Indent <head> sections."

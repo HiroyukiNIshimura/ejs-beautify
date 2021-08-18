@@ -49,6 +49,9 @@ const prettyDiff = (document: TextDocument, range: Range) => {
     const result = [];
 
     let output = jsbeautify.html(document.getText(range), config);
+    if (output) {
+        output = output.replace(/\n\n/g, '\n')
+    }
     result.push(TextEdit.replace(range, output));
     return result;
 };
