@@ -115,6 +115,11 @@
           "default": false,
           "description": "Add a space before a named function's parens, i.e. function example ()."
         },
+        "js-beautify.space_before_conditional": {
+          "type": "boolean",
+          "default": true,
+          "description": "Space before conditional: 'if(x)' / 'if (x)'"
+        },
         "js-beautify.brace_style": {
           "type": "string",
           "default": "collapse",
