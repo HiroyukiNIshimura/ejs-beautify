@@ -20,3 +20,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - If there is Vue "{{", js-beautify formatting will insert a line break, so it corresponds to that behavior.
 - Indent default changed from 4 to 2.
+
+## 1.0.3
+
+- Added GIF animation to Readme.

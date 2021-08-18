@@ -3,7 +3,7 @@
   "displayName": "EJS Beautify",
   "publisher": "j69",
   "description": "A formatter extension for EJS files for VS Code. 'js-beautify' is used as the format engine.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "engines": {
     "vscode": "^1.59.0"
   },
