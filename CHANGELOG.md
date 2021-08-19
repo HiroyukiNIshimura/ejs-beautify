@@ -24,3 +24,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## 1.0.3
 
 - Added GIF animation to Readme.
+
+## 1.0.4
+
+- Changed GIF animation to Readme.

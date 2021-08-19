@@ -6,7 +6,7 @@ A formatter extension for EJS files for VS Code. 'js-beautify' is used as the fo
 
 ![demo](./preview.gif)
 
-### 1.0.3
+### 1.0.4
 
 Current release.
 
