@@ -3,7 +3,7 @@
   "displayName": "EJS Beautify",
   "publisher": "j69",
   "description": "A formatter extension for EJS files for VS Code. 'js-beautify' is used as the format engine.",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "engines": {
     "vscode": "^1.59.0"
   },
@@ -32,10 +32,32 @@
     "beautify"
   ],
   "activationEvents": [
-    "*"
+    "*",
+    "onCommand:extension.formatSelectionAsHtmlBeautify"
   ],
   "main": "./out/extension.js",
   "contributes": {
+    "commands": [
+      {
+        "command": "extension.formatSelectionAsHtmlBeautify",
+        "title": "Format Selection As EJS Beautify"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "extension.formatSelectionAsHtmlBeautify",
+          "group": "1_modification@2",
+          "when": "editorHasSelection"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "extension.formatSelectionAsHtmlBeautify",
+          "when": "editorHasSelection"
+        }
+      ]
+    },
     "configuration": {
       "type": "object",
       "title": "EJS Beautify",

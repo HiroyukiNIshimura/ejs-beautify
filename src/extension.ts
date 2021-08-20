@@ -9,7 +9,9 @@ import {
     Range,
     DocumentSelector,
     Disposable,
-    TextEdit
+    TextEdit,
+    window,
+    commands
 } from 'vscode';
 
 //https://github.com/beautify-web/js-beautify
@@ -40,24 +42,31 @@ const selectors = [
     'ejs', //EJS (Embedded JavaScript) Templates
     'erb', //ERB (Embedded Ruby)
     'html', //HTML
+    'razor', //Razor (cshtml)
     'tpl', //Underscore Templates (TPL)
     'xml', //XML
     'xslt', //XSLT
 ];
 
-const beautify = (document: TextDocument, range: Range) => {
-    const result = [];
+function format(document: TextDocument, range: Range) {
     let opts = JSON.parse(JSON.stringify(config));
-
     let output = jsbeautify.html(document.getText(range), opts);
     if (output) {
-        output = output.replace(/\n\n(\s+{{)/g, '\n$1')
+        output = output.replace(/\n\n(\s+{{)/g, '\n$1');
     }
+    return output;
+}
+
+const beautify = (document: TextDocument, range: Range) => {
+    const result = [];
+    let output = format(document, range);
     result.push(TextEdit.replace(range, output));
     return result;
 };
 
 export function activate(context: ExtensionContext) {
+    context.subscriptions.push(commands.registerCommand('extension.formatSelectionAsHtmlBeautify', formatSelectionAsHtmlBeautify));
+
     interface Selectors {
         rangeLanguageSelector: DocumentSelector;
         languageSelector: DocumentSelector;
@@ -70,10 +79,10 @@ export function activate(context: ExtensionContext) {
     function registerFormatter() {
         disposeHandlers();
 
-        for (let i in enabledLanguages) {
+        for (let lang of enabledLanguages) {
             rangeFormatterHandler = languages.registerDocumentRangeFormattingEditProvider({
                 scheme: 'file',
-                language: enabledLanguages[i]
+                language: lang
             }, {
                 provideDocumentRangeFormattingEdits: function (document: TextDocument, range: Range) {
                     let end = range.end;
@@ -91,7 +100,7 @@ export function activate(context: ExtensionContext) {
 
             formatterHandler = languages.registerDocumentFormattingEditProvider({
                 scheme: 'file',
-                language: enabledLanguages[i]
+                language: lang
             }, {
                 provideDocumentFormattingEdits: function (document: TextDocument) {
                     const start = new Position(0, 0);
@@ -111,3 +120,15 @@ export function activate(context: ExtensionContext) {
 
 // this method is called when your extension is deactivated
 export function deactivate() { }
+
+async function formatSelectionAsHtmlBeautify() {
+    if (!window.activeTextEditor) {
+        return;
+    }
+    const document = window.activeTextEditor.document;
+    const selection = window.activeTextEditor.selection;
+
+    let output = format(document, selection);
+    await window.activeTextEditor.edit(builder => builder.replace(selection, output));
+}
+

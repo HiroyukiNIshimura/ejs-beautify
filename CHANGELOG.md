@@ -28,3 +28,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## 1.0.4
 
 - Changed GIF animation to Readme.
+
+## 1.0.5
+
+- Added a function to the context menu so that the selection can be formatted regardless of the file type.
