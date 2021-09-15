@@ -11,12 +11,13 @@ import {
     Disposable,
     TextEdit,
     window,
-    commands
+    commands,
+    WorkspaceConfiguration,
+    Uri,
 } from 'vscode';
 
 //https://github.com/beautify-web/js-beautify
 const jsbeautify = require('js-beautify');
-const config = workspace.getConfiguration('js-beautify');
 
 let formatterHandler: undefined | Disposable;
 let rangeFormatterHandler: undefined | Disposable;
@@ -48,8 +49,8 @@ const selectors = [
     'xslt', //XSLT
 ];
 
-function format(document: TextDocument, range: Range) {
-    let opts = JSON.parse(JSON.stringify(config));
+
+function format(document: TextDocument, range: Range, opts: any) {
     let output = jsbeautify.html(document.getText(range), opts);
     if (output) {
         output = output.replace(/\n\n(\s+{{)/g, '\n$1');
@@ -57,14 +58,32 @@ function format(document: TextDocument, range: Range) {
     return output;
 }
 
-const beautify = (document: TextDocument, range: Range) => {
+async function getConfig() {
+    let config = workspace.getConfiguration('js-beautify');
+    let opts = JSON.parse(JSON.stringify(config));
+
+    let rc = await workspace.findFiles('**/.ejsbrc.json');
+    if (rc && rc.length > 0) {
+        try {
+            let doc = await workspace.openTextDocument(Uri.file(rc[0].fsPath));
+            let extendOption = JSON.parse(doc.getText());
+            opts = Object.assign(opts, extendOption);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    return opts;
+}
+
+const beautify = async (document: TextDocument, range: Range) => {
     const result = [];
-    let output = format(document, range);
+    var config = await getConfig();
+    let output = format(document, range, config);
     result.push(TextEdit.replace(range, output));
     return result;
 };
 
-export function activate(context: ExtensionContext) {
+export async function activate(context: ExtensionContext) {
     context.subscriptions.push(commands.registerCommand('extension.formatSelectionAsHtmlBeautify', formatSelectionAsHtmlBeautify));
 
     interface Selectors {
@@ -113,6 +132,7 @@ export function activate(context: ExtensionContext) {
         }
     }
 
+    var config = await getConfig();
     if (config.formatting) {
         registerFormatter();
     }
@@ -128,7 +148,8 @@ async function formatSelectionAsHtmlBeautify() {
     const document = window.activeTextEditor.document;
     const selection = window.activeTextEditor.selection;
 
-    let output = format(document, selection);
+    var config = await getConfig();
+    let output = format(document, selection, config);
     await window.activeTextEditor.edit(builder => builder.replace(selection, output));
 }
 

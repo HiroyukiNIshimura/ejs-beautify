@@ -32,3 +32,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## 1.0.5
 
 - Added a function to the context menu so that the selection can be formatted regardless of the file type.
+
+## 1.0.6
+
+- Enabled to set in an external file (.ejsbrc.json) so that the rules specific to the development team can be set.
