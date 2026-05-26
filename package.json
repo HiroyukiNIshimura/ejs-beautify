@@ -32,7 +32,7 @@
     "beautify"
   ],
   "activationEvents": [
-    "*",
+    "onLanguage:ejs",
     "onCommand:extension.formatSelectionAsHtmlBeautify"
   ],
   "main": "./out/extension.js",
@@ -359,7 +359,9 @@
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js",
-    "package": "npx vsce package"
+    "package": "vsce package",
+    "publish": "vsce publish",
+    "publish:openvsx": "ovsx publish"
   },
   "devDependencies": {
     "@types/glob": "^7.1.3",
@@ -369,9 +371,11 @@
     "@types/vscode": "^1.59.0",
     "@typescript-eslint/eslint-plugin": "^4.26.0",
     "@typescript-eslint/parser": "^4.26.0",
+    "@vscode/vsce": "^3.9.1",
     "eslint": "^7.27.0",
     "glob": "^7.1.7",
     "mocha": "^8.4.0",
+    "ovsx": "^0.10.12",
     "typescript": "^4.3.2",
     "vscode-test": "^1.5.2"
   },
